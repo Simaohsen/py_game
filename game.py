@@ -18,7 +18,7 @@ class Game:
 
     
     def print_menu(self):
-        print("Your Turn! Choose what you want to do!\n[1]To fight in the Arena!\n[2]To enter the Shop\n[3]To show your Inventory\n3[X]To quit the Game!")
+        print("Your Turn! Choose what you want to do!\n[1]To fight in the Arena!\n[2]To enter the Shop\n[3]To show your Inventory\n[X]To quit the Game!")
         
     
         
