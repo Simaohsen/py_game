@@ -17,7 +17,7 @@ class Player:
             player_turn_dmg = self.inventory.weapon.dmg_roll()
             Enemy.health -= player_turn_dmg
             print("{0} deals {1} DMG! {2} has {3} Health left!".format(self.name, player_turn_dmg, Enemy.name, Enemy.health))
-            self.show_fight_art()
+           
             if Enemy.health <= 0:
                 print("You Win!")
                 return True

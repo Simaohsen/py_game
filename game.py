@@ -2,6 +2,7 @@
 import player
 import enemy
 import shop
+import fight
 
 
 class Game:
@@ -29,7 +30,8 @@ class Game:
             self.print_menu()
             player_input = input("Enter your choice!\nYour Choice: ").lower()
             if player_input == "1":
-                game_on = self.player.fight(enemy.Enemy(20,1,3))
+                new_fight = fight.Fight(self.player,enemy.Enemy(20,1,3))
+                game_on = new_fight.fight()
                 
             elif player_input == "2":
                 in_shop = True
