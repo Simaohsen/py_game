@@ -17,6 +17,7 @@ class Player:
             player_turn_dmg = self.inventory.weapon.dmg_roll()
             Enemy.health -= player_turn_dmg
             print("{0} deals {1} DMG! {2} has {3} Health left!".format(self.name, player_turn_dmg, Enemy.name, Enemy.health))
+            self.show_fight_art()
             if Enemy.health <= 0:
                 print("You Win!")
                 return True
@@ -32,7 +33,12 @@ class Player:
                 print("You lose!")
                 return False
             time.sleep(2)
-            print("#########################################################\n###                                ####\n#########################################################")
+
+    def show_fight_art(self):
+        print("""
+             /| __________________
+         O|===|* >________________>
+             \|""")
 
     def set_item(self, item):
         self.inventory.set_item(item)
