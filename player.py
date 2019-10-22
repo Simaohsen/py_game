@@ -32,6 +32,7 @@ class Player:
                 print("You lose!")
                 return False
             time.sleep(2)
+            print("#########################################################\n###                                ####\n#########################################################")
 
     def set_item(self, item):
         self.inventory.set_item(item)
