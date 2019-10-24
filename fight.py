@@ -13,21 +13,23 @@ class Fight:
 
     def fight(self):
 
+        turn_counter = 1
+        last_turn_fight_output_line = ""
         while self.player.health > 0 and self.enemy.health > 0:
 
             self.clear_screen()
             print(self.render_fight_overview(self.player, self.enemy))
-            time.sleep(2)
+            if not last_turn_fight_output_line == "":
+                print(last_turn_fight_output_line[0])
+                print(last_turn_fight_output_line[1])
+                print(last_turn_fight_output_line[2])
+
             player_turn_dmg = self.player.inventory.weapon.dmg_roll()
             self.enemy.health -= player_turn_dmg
 
+            player_turn_output_line = self.create_roll_string(self.player.name, player_turn_dmg, self.enemy.name,
+                                                                       self.enemy.health)
 
-
-            print(self.create_roll_string(self.player.name, player_turn_dmg, self.enemy.name,
-                                                                       self.enemy.health))
-            if self.enemy.health <= 0:
-                print("You Win!")
-                return True
 
             time.sleep(2)
             enemy_turn_dmg = self.enemy.dmg_roll() - self.player.inventory.armor.armor_value - self.player.inventory.shield.block_roll()
@@ -36,23 +38,37 @@ class Fight:
                 enemy_turn_dmg = 0
 
             self.player.health -= enemy_turn_dmg
-            print(self.create_roll_string(self.enemy.name, enemy_turn_dmg, self.player.name,
-                                                                           self.player.health))
+
+            enemy_turn_output_line = self.create_roll_string(self.enemy.name, enemy_turn_dmg, self.player.name,
+                                                                           self.player.health)
+            fight_output_line = "______________________Turn {0}______________________".format(turn_counter),player_turn_output_line, enemy_turn_output_line
+
+            self.clear_screen()
+            print(self.render_fight_overview(self.player, self.enemy))
+            if not last_turn_fight_output_line == "":
+                print(last_turn_fight_output_line[0])
+                print(last_turn_fight_output_line[1])
+                print(last_turn_fight_output_line[2])
+
+            print(fight_output_line[0])
+            print(fight_output_line[1])
+            print(fight_output_line[2])
+
+            if self.enemy.health <= 0 and self.player.health > 0:
+                self.player.add_gold(self.enemy.loot)
+                print("You Win!")
+                return True
 
             if self.player.health <= 0:
                 print("You lose!")
                 return False
-
+            turn_counter += 1
+            last_turn_fight_output_line = fight_output_line
+            time.sleep(4)
 
 
     def create_roll_string(self, attacker_name, turn_dmg, victim_name, victim_health):
         return "{0} deals {1} DMG! {2} has {3} Health left!".format(attacker_name, turn_dmg, victim_name, victim_health)
-
-    def show_fight_art(self):
-        print("""
-                 /| __________________
-             O|===|* >________________>
-                 \|""")
 
 
     def render_healthbar(self, character):

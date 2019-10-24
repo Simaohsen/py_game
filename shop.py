@@ -33,9 +33,15 @@ class Shop:
             print("[{0}]".format(str(self.itemlist.index(item)+1))+str(item))
 
         print("[X]Go Back")
-        player_input = input("Which Item do you want?:")
+        player_input = int(input("Which Item do you want?:"))-1
         if player_input == "x":
             self.show_shop_prompt(player)
-        else:
-            player.set_item(self.itemlist[int(player_input)-1])
+        elif self.get_item(player_input).price<= player.inventory.gold:
+            player.set_item(self.get_item(player_input))
+            player.spend_gold(self.get_item(player_input).price)
+
+
+
+    def get_item(self, input):
+        return self.itemlist[input]
 

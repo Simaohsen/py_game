@@ -31,4 +31,9 @@ class Inventory:
             self.armor = item
 
     def get_inventory(self):
-        return [self.weapon, self.shield, self.armor, self.gold]
+        return [self.weapon, self.shield, self.armor]
+
+    def print_inventory(self):
+        for item in self.get_inventory():
+            print(item)
+        print(str(self.gold) +" Gold")

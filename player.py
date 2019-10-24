@@ -34,15 +34,16 @@ class Player:
                 return False
             time.sleep(2)
 
-    def show_fight_art(self):
-        print("""
-             /| __________________
-         O|===|* >________________>
-             \|""")
 
     def set_item(self, item):
         self.inventory.set_item(item)
 
+    def add_gold(self, gold):
+        self.inventory.add_gold(gold)
+
+    def spend_gold(self, gold):
+        return self.inventory.spend_gold(gold)
+
+
     def print_inventory(self):
-        for item in self.inventory.get_inventory():
-            print(item)
+        self.inventory.print_inventory()
