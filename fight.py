@@ -1,5 +1,5 @@
 import time
-import os
+from display import clear_screen
 
 
 class Fight:
@@ -17,7 +17,7 @@ class Fight:
         last_turn_fight_output_line = ""
         while self.player.health > 0 and self.enemy.health > 0:
 
-            self.clear_screen()
+            clear_screen()
             print(self.render_fight_overview(self.player, self.enemy))
             if not last_turn_fight_output_line == "":
                 print(last_turn_fight_output_line[0])
@@ -43,7 +43,7 @@ class Fight:
                                                                            self.player.health)
             fight_output_line = "______________________Turn {0}______________________".format(turn_counter),player_turn_output_line, enemy_turn_output_line
 
-            self.clear_screen()
+            clear_screen()
             print(self.render_fight_overview(self.player, self.enemy))
             if not last_turn_fight_output_line == "":
                 print(last_turn_fight_output_line[0])
@@ -88,5 +88,3 @@ class Fight:
         pass
 
 
-    def clear_screen(self):
-        os.system('cls')

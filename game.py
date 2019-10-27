@@ -39,7 +39,7 @@ class Game:
                     in_shop = self.shop.show_shop_prompt(self.player)
 
             elif player_input == "3":
-                self.player.print_inventory()
+                self.player.go_to_inventory(self.player)
 
             elif player_input == "x":
                 game_on = False

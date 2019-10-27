@@ -9,6 +9,8 @@ class Inventory:
         self.weapon = items.Weapon("Short Sword", 0, 1, 5)
         self.shield = items.Shield("Wooden Shield", 0, 1)
         self.armor = items.Armor("Leather Scraps", 0, 1)
+        self.potion = items.Potion("Healing Potion", 0, 15)
+        self.potion_counter = 1
 
     def add_gold(self, gold_added):
         if gold_added > 0:
@@ -30,10 +32,15 @@ class Inventory:
         elif (isinstance(item, items.Armor)):
             self.armor = item
 
+    def add_potion(self):
+        self.potion_counter +=1
+
     def get_inventory(self):
         return [self.weapon, self.shield, self.armor]
 
-    def print_inventory(self):
+    def print_inventory(self, player):
         for item in self.get_inventory():
             print(item)
-        print(str(self.gold) +" Gold")
+        print(str(self.gold) + " Gold")
+        print("Health: " + str(player.health))
+        print("Healing Potions: " + str(self.potion_counter))

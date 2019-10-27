@@ -8,6 +8,7 @@ class Player:
 
     def __init__(self, name, health):
         self.name = name
+        self.max_health = health
         self.health = health
         self.inventory = inventory.Inventory()
         print("Player {0} created. \nHealth:{1}".format(self.name, self.health))
@@ -44,6 +45,22 @@ class Player:
     def spend_gold(self, gold):
         return self.inventory.spend_gold(gold)
 
+    def add_potion(self):
+        self.inventory.add_potion()
 
-    def print_inventory(self):
-        self.inventory.print_inventory()
+    def use_potion(self):
+        if self.inventory.potion_counter > 0:
+            self.inventory.potion_counter -= 1
+            if self.health + self.inventory.potion.heal_value > self.max_health:
+                self.health = self.max_health
+            else:
+                self.health += self.inventory.potion.heal_value
+
+
+    def go_to_inventory(self, player):
+        self.inventory.print_inventory(player)
+        print("Want to use Healing Potion? [Y]es / [N]o?")
+        player_input = input("Your choice?:").lower()
+
+        if player_input == "y":
+            self.use_potion()
