@@ -12,7 +12,7 @@ class Fight:
         self.enemy = enemy
 
     def fight(self):
-
+        """Fight Method. Returns True if Player wins. Returns False if player loses."""
         turn_counter = 1
         last_turn_fight_output_line = ""
         while self.player.health > 0 and self.enemy.health > 0:

@@ -24,7 +24,6 @@ class Game:
         
     def run(self):
         game_on = True
-        in_shop = True
         self.print_start()
         while game_on:
             self.print_menu()
