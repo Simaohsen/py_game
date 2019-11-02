@@ -7,7 +7,7 @@ class Shop:
 
     def __init__(self):
 
-        self.itemlist = [items.Weapon("Better Sword", 2, 3, 8), items.Armor("Better Armor", 2, 2), items.Shield("Better Shield", 2, 2)]
+        self.itemlist = [items.Weapon("Better Sword", 2, 2, 7), items.Armor("Better Armor", 2, 2), items.Shield("Better Shield", 2, 2),items.Weapon("Ultra Sword", 8, 10, 15), items.Armor("Ultra Armor", 8, 8), items.Shield("Ultra Shield",8, 10) ]
         self.potion = items.Potion("Healing Potion", 1, 10)
 
 
@@ -34,7 +34,9 @@ class Shop:
 
         print("[X]Go Back")
         player_input = input("Which Item do you want?:")
-        player_input_int = int(player_input)-1
+
+        if not player_input == "x":
+            player_input_int = int(player_input)-1
         if player_input == "x":
             self.show_shop_prompt(player)
 

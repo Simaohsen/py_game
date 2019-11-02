@@ -3,15 +3,17 @@ import player
 import enemy
 import shop
 import fight
+from world import World, World_Tile
+from city import City
 
 
 class Game:
     """The Game Class"""
 
 
-    def __init__(self, player_name, player_health, shop):
-        self.player = player.Player(player_name, player_health)
-        self.shop = shop
+    def __init__(self):
+        self.player = player.Player("Player 1", 20)
+        self.city = City(self.player, World(self.player, [World_Tile(enemy.Simple_Enemy(), False), World_Tile(enemy.Medium_Enemy(), False), World_Tile(enemy.Hard_Enemy(), False), World_Tile(enemy.Endboss(), True)]))
     
     def print_start(self):
         print("#####Welcome to the Game#####")
@@ -23,27 +25,11 @@ class Game:
     
         
     def run(self):
-        game_on = True
         self.print_start()
+        game_on = True
         while game_on:
-            self.print_menu()
-            player_input = input("Enter your choice!\nYour Choice: ").lower()
-            if player_input == "1":
-                new_fight = fight.Fight(self.player,enemy.Enemy(20,1,3,1))
-                game_on = new_fight.fight()
-                
-            elif player_input == "2":
-                in_shop = True
-                while in_shop:
-                    in_shop = self.shop.show_shop_prompt(self.player)
+            game_on = self.city.enter_city()
 
-            elif player_input == "3":
-                self.player.go_to_inventory(self.player)
-
-            elif player_input == "x":
-                game_on = False
-        print("Game Over!")        
-
-game = Game("Test", 20, shop.Shop())
+game = Game()
 
 game.run()
